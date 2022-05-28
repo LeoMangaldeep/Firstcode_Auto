@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Threading;
 
 namespace localFirst_Auto
 {
@@ -39,6 +40,36 @@ namespace localFirst_Auto
             {
                 Console.WriteLine("Login Failed, Test Failed");
             }
+
+            //Find Administration element & click the dropdown to select Time&Material & click
+            IWebElement adminDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
+            adminDropdown.Click();
+            IWebElement tmOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
+            tmOption.Click();
+
+            //Select Create New element in the time&material collumn
+            IWebElement createNew = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
+            createNew.Click();
+            
+
+            //Select Typecode dropdown to choose time & click
+            IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/label"));
+            typeCodeDropdown.Click();
+            
+            IWebElement materialOption = driver.FindElement(By.Id("TypeCode_option_selected"));
+            materialOption.Click(); 
+
+            //Find code Textbox element to enter new value
+            IWebElement codeBox = driver.FindElement(By.Id("Code"));
+            codeBox.SendKeys("code123");
+
+            //Find Description Textbox element to enter new value
+            IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
+            descriptionTextbox.SendKeys("descrip123");
+
+            //Find Price per unit textbox to enter new value
+
+            //Find Save element and click
         }
     }
 }
