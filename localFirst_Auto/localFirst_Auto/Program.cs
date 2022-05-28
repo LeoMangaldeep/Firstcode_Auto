@@ -44,6 +44,7 @@ namespace localFirst_Auto
             //Find Administration element & click the dropdown to select Time&Material & click
             IWebElement adminDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
             adminDropdown.Click();
+
             IWebElement tmOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             tmOption.Click();
 
@@ -78,6 +79,29 @@ namespace localFirst_Auto
             //Find Save element and click
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
+            Thread.Sleep(1000);
+
+            //Select gotolastpage(>|) icon
+
+            IWebElement goToLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPage.Click();                         
+            Thread.Sleep(2500);
+
+            //Confirm the creation of new row
+
+            IWebElement newRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            //Thread.Sleep(3500);                               
+                                                              
+            if (newRow.Text == "code123")
+            {
+                Console.WriteLine("Row created Successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Failed to create a New Row.");
+            }
+
+
         }
     }
 }
