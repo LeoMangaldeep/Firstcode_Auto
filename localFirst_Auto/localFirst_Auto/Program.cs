@@ -56,8 +56,8 @@ namespace localFirst_Auto
             IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/label"));
             typeCodeDropdown.Click();
             
-            IWebElement materialOption = driver.FindElement(By.Id("TypeCode_option_selected"));
-            materialOption.Click(); 
+            //IWebElement materialOption = driver.FindElement(By.Id("TypeCode_option_selected"));
+            //materialOption.Click(); 
 
             //Find code Textbox element to enter new value
             IWebElement codeBox = driver.FindElement(By.Id("Code"));
@@ -66,10 +66,18 @@ namespace localFirst_Auto
             //Find Description Textbox element to enter new value
             IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
             descriptionTextbox.SendKeys("descrip123");
+            
 
             //Find Price per unit textbox to enter new value
+            IWebElement pPUTextbox = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
+            pPUTextbox.Click();
+            
+            IWebElement pPUInputTextbox = driver.FindElement(By.Id("Price"));
+            pPUInputTextbox.SendKeys("12");
 
             //Find Save element and click
+            IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
+            saveButton.Click();
         }
     }
 }
