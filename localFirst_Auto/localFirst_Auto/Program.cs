@@ -54,11 +54,10 @@ namespace localFirst_Auto
             
 
             //Select Typecode dropdown to choose time & click
-            IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/label"));
-            typeCodeDropdown.Click();
-            
-            //IWebElement materialOption = driver.FindElement(By.Id("TypeCode_option_selected"));
-            //materialOption.Click(); 
+            IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
+            typeCodeDropdown.Click();                                  
+            Thread.Sleep(1500);
+
 
             //Find code Textbox element to enter new value
             IWebElement codeBox = driver.FindElement(By.Id("Code"));
@@ -84,7 +83,7 @@ namespace localFirst_Auto
             //Select gotolastpage(>|) icon
 
             IWebElement goToLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPage.Click();                         
+            goToLastPage.Click();                                  
             Thread.Sleep(2500);
 
             //Confirm the creation of new row
@@ -94,12 +93,46 @@ namespace localFirst_Auto
                                                               
             if (newRow.Text == "code123")
             {
-                Console.WriteLine("Row created Successfully.");
+                Console.WriteLine("Row created Successfully,Test Passed.");
             }
             else
             {
-                Console.WriteLine("Failed to create a New Row.");
+                Console.WriteLine("Failed to create a New Row, Test Failed.");
             }
+            Thread.Sleep(1500);
+
+            //Select Edit Element and click
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr/td[5]/a[1]"));
+            editButton.Click();
+            Thread.Sleep(3500);
+
+            //Select Time option in typecode dropdown
+
+            IWebElement dropDownOption = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
+            dropDownOption.Click();
+
+            IWebElement timeOption = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
+            timeOption.Click();
+            Thread.Sleep(2500);
+
+            //Select code element and give neew input
+
+            IWebElement editCode = driver.FindElement(By.Id("Code"));
+            editCode.Clear();
+            editCode.SendKeys("How?");
+            Thread.Sleep(2500);
+
+            //Select description element and give neew input
+            IWebElement editDescriptionTextbox= driver.FindElement(By.Id("Description");
+            editDescriptionTextbox.Clear();
+            editDescriptionTextbox.SendKeys("Miracle");
+            Thread.Sleep(2500);
+
+            //Select price element and give new input
+
+            //click save element
+
+            //driver.Close(); 
 
 
         }
