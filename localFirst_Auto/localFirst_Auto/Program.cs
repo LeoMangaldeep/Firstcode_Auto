@@ -116,21 +116,46 @@ namespace localFirst_Auto
             Thread.Sleep(2500);
 
             //Select code element and give neew input
+            //codeBox.Click();
 
             IWebElement editCode = driver.FindElement(By.Id("Code"));
             editCode.Clear();
             editCode.SendKeys("How?");
             Thread.Sleep(2500);
 
-            //Select description element and give neew input
-            IWebElement editDescriptionTextbox= driver.FindElement(By.Id("Description");
+            //Select description element and give new input
+            IWebElement editDescriptionTextbox = driver.FindElement(By.Id("Description"));
             editDescriptionTextbox.Clear();
             editDescriptionTextbox.SendKeys("Miracle");
             Thread.Sleep(2500);
 
             //Select price element and give new input
+            IWebElement editPriceTextbox = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
+            editPriceTextbox.Click();
+            //Thread.Sleep(5000);
+
+            IWebElement editEditNewPrice = driver.FindElement(By.Id("Price"));
+            editEditNewPrice.Clear(); 
+            
+            //Manually getting inputs from console
+            Console.WriteLine("Enter Input");                         
+            string newInput = Console.ReadLine();
+            Console.WriteLine(newInput);
+            editPriceTextbox.Click();
+            editEditNewPrice.SendKeys(newInput);
+            Thread.Sleep(2500);
 
             //click save element
+            IWebElement editSave = driver.FindElement(By.XPath("//*[@id='SaveButton']"));
+            editSave.Click();
+
+            //Check if the edited row is saved?
+
+            IWebElement editLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]"));
+            editLastPage.Click();
+            Console.WriteLine("Edited Row saved Succefully.");
+
+            //IWebElement lastRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[2]"));
 
             //driver.Close(); 
 
