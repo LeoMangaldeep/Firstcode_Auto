@@ -55,12 +55,9 @@ namespace localFirst_Auto
 
             //Select Typecode dropdown to choose time & click
             IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
-            typeCodeDropdown.Click();                                  //*[@id="TimeMaterialEditForm"]/div/div[1]/div/span[1]
+            typeCodeDropdown.Click();                                  
             Thread.Sleep(1500);
 
-
-            //IWebElement materialOption = driver.FindElement(By.Id("TypeCode_option_selected"));
-            //materialOption.Click(); 
 
             //Find code Textbox element to enter new value
             IWebElement codeBox = driver.FindElement(By.Id("Code"));
@@ -86,7 +83,7 @@ namespace localFirst_Auto
             //Select gotolastpage(>|) icon
 
             IWebElement goToLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPage.Click();                                   //*[@id='tmsGrid']/div[4]/a[4]/span
+            goToLastPage.Click();                                  
             Thread.Sleep(2500);
 
             //Confirm the creation of new row
