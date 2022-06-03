@@ -51,11 +51,11 @@ namespace localFirst_Auto
             //Select Create New element in the time&material collumn
             IWebElement createNew = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
             createNew.Click();
-            
+
 
             //Select Typecode dropdown to choose time & click
             IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
-            typeCodeDropdown.Click();                                  
+            typeCodeDropdown.Click();
             Thread.Sleep(1500);
 
 
@@ -66,12 +66,12 @@ namespace localFirst_Auto
             //Find Description Textbox element to enter new value
             IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
             descriptionTextbox.SendKeys("descrip123");
-            
+
 
             //Find Price per unit textbox to enter new value
             IWebElement pPUTextbox = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
             pPUTextbox.Click();
-            
+
             IWebElement pPUInputTextbox = driver.FindElement(By.Id("Price"));
             pPUInputTextbox.SendKeys("12");
 
@@ -83,14 +83,14 @@ namespace localFirst_Auto
             //Select gotolastpage(>|) icon
 
             IWebElement goToLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPage.Click();                                  
+            goToLastPage.Click();
             Thread.Sleep(2500);
 
             //Confirm the creation of new row
 
             IWebElement newRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             //Thread.Sleep(3500);                               
-                                                              
+
             if (newRow.Text == "code123")
             {
                 Console.WriteLine("Row created Successfully,Test Passed.");
@@ -135,29 +135,55 @@ namespace localFirst_Auto
             //Thread.Sleep(5000);
 
             IWebElement editEditNewPrice = driver.FindElement(By.Id("Price"));
-            editEditNewPrice.Clear(); 
-            
+            editEditNewPrice.Clear();
+
             //Manually getting inputs from console
-            Console.WriteLine("Enter Input");                         
-            string newInput = Console.ReadLine();
-            Console.WriteLine(newInput);
+            //Console.WriteLine("Enter Input");                         
+            //string newInput = Console.ReadLine();
+            //Console.WriteLine(newInput);
             editPriceTextbox.Click();
-            editEditNewPrice.SendKeys(newInput);
+            editEditNewPrice.SendKeys("33");
             Thread.Sleep(2500);
 
             //click save element
-            IWebElement editSave = driver.FindElement(By.XPath("//*[@id='SaveButton']"));
+            IWebElement editSave = driver.FindElement(By.Id("SaveButton"));
             editSave.Click();
+            Thread.Sleep(2000);
 
-            //Check if the edited row is saved?
 
-            IWebElement editLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]"));
-            editLastPage.Click();
-            Console.WriteLine("Edited Row saved Succefully.");
+            //goToLastPage.Click();
+            IWebElement editGoToLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]"));
+            Thread.Sleep(2000);
+            editGoToLastPage.Click();
+            Thread.Sleep(2000);
 
-            //IWebElement lastRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[2]"));
+            //Check if edited row saved
 
-            //driver.Close(); 
+            IWebElement updatedCodeBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]"));
+
+            IWebElement updatedTypeShowBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[2]"));
+
+            IWebElement updatedDescBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[3]"));
+
+            IWebElement updatedPriceBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[4]"));
+
+
+            if (updatedCodeBox.Text == "How?" && updatedDescBox.Text == "Miracle" && updatedPriceBox.Text == "$33.00")
+
+            {
+                Console.WriteLine("Updated successfully,test pass");
+            }
+            else
+            {
+                Console.WriteLine("Update Failed,test failed");
+            }
+            Thread.Sleep(4500);
+            //Delete Last Row
+
+            IWebElement deleteLastRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
+            deleteLastRow.Click();
+            IAlert oKMessage = driver.SwitchTo().Alert();
+            oKMessage.Accept();
 
 
         }
