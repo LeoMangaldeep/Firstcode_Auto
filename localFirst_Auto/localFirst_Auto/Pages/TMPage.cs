@@ -1,45 +1,21 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace localFirst_Auto
+namespace localFirst_Auto.Pages
 {
-    internal class Program
+    public class TMPage
+
     {
-        static void Main(string[] args)
+        public void CreateTM(IWebDriver driver)
         {
             //launch web browser "chrome browser"
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            //launch url "horse.turnup"
-            driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2fTimeMaterial");
-
-            // Select username textbox & enter valid username credentials.
-            IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
-            usernameTextbox.SendKeys("hari");
-
-            // Select password textbox and enter valid credentials.
-            IWebElement passwordTextbox = driver.FindElement(By.Id("Password"));
-            passwordTextbox.SendKeys("123123");
-
-            //identify the login textbox and click.
-            IWebElement loginButton = driver.FindElement(By.XPath("//*[@id='loginForm']/form/div[3]/input[1]"));
-            loginButton.Click();
-
-            //Check if it was successfully loggedin.
-            IWebElement helloHari = driver.FindElement(By.XPath("//*[@id='logoutForm']/ul/li/a"));
-
-
-            if (helloHari.Text == "Hello hari!")
-            {
-                Console.WriteLine("Login Successful, Test Passed");
-            }
-            else
-            {
-                Console.WriteLine("Login Failed, Test Failed");
-            }
+            driver = new ChromeDriver();
 
             //Find Administration element & click the dropdown to select Time&Material & click
             IWebElement adminDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
@@ -99,25 +75,25 @@ namespace localFirst_Auto
             {
                 Console.WriteLine("Failed to create a New Row, Test Failed.");
             }
-            Thread.Sleep(1500);
 
+        }
+
+        public void EditTM(IWebDriver driver)
+
+        {
             //Select Edit Element and click
             IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr/td[5]/a[1]"));
             editButton.Click();
             Thread.Sleep(3500);
 
             //Select Time option in typecode dropdown
-
             IWebElement dropDownOption = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
             dropDownOption.Click();
-
             IWebElement timeOption = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
             timeOption.Click();
             Thread.Sleep(2500);
 
-            //Select code element and give neew input
-            //codeBox.Click();
-
+            //Select code element and give new input
             IWebElement editCode = driver.FindElement(By.Id("Code"));
             editCode.Clear();
             editCode.SendKeys("How?");
@@ -134,13 +110,9 @@ namespace localFirst_Auto
             editPriceTextbox.Click();
             //Thread.Sleep(5000);
 
+            //Manually getting inputs
             IWebElement editEditNewPrice = driver.FindElement(By.Id("Price"));
-            editEditNewPrice.Clear();
-
-            //Manually getting inputs from console
-            //Console.WriteLine("Enter Input");                         
-            //string newInput = Console.ReadLine();
-            //Console.WriteLine(newInput);
+            editEditNewPrice.Clear();                        
             editPriceTextbox.Click();
             editEditNewPrice.SendKeys("33");
             Thread.Sleep(2500);
@@ -177,15 +149,15 @@ namespace localFirst_Auto
             {
                 Console.WriteLine("Update Failed,test failed");
             }
-            Thread.Sleep(4500);
+        }
+        public void DeleteTM(IWebDriver driver)
+        {
             //Delete Last Row
-
             IWebElement deleteLastRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
             deleteLastRow.Click();
             IAlert oKMessage = driver.SwitchTo().Alert();
             oKMessage.Accept();
-
-
         }
     }
+
 }
