@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using localFirst_Auto.Utilities;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,11 @@ namespace localFirst_Auto.Pages
     {
         public void CreateTM(IWebDriver driver)
         {
-            //launch web browser "chrome browser"
-            driver = new ChromeDriver();
-
-            //Find Administration element & click the dropdown to select Time&Material & click
-            IWebElement adminDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
-            adminDropdown.Click();
-
-            IWebElement tmOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
-            tmOption.Click();
-
+            
             //Select Create New element in the time&material collumn
             IWebElement createNew = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
             createNew.Click();
+            WaitHelpers.WaitForElementToBeClickable(driver,"XPath","//*[@id='container']/p/a",5);
 
 
             //Select Typecode dropdown to choose time & click
