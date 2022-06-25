@@ -1,4 +1,5 @@
 ﻿using localFirst_Auto.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -61,13 +62,14 @@ namespace localFirst_Auto.Pages
             IWebElement newRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             //Thread.Sleep(3500);                               
 
+            //Example-1
             if (newRow.Text == "code123")
             {
-                Console.WriteLine("Row created Successfully,Test Passed.");
+                Assert.Pass("Row created Successfully,Test Passed.");
             }
             else
             {
-                Console.WriteLine("Failed to create a New Row, Test Failed.");
+                Assert.Fail("Failed to create a New Row, Test Failed.");
             }
 
         }
@@ -134,15 +136,17 @@ namespace localFirst_Auto.Pages
             IWebElement updatedPriceBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[4]"));
 
 
-            if (updatedCodeBox.Text == "How?" && updatedDescBox.Text == "Miracle" && updatedPriceBox.Text == "$33.00")
+            //if (updatedCodeBox.Text == "How?" && updatedDescBox.Text == "Miracle" && updatedPriceBox.Text == "$33.00")
 
-            {
-                Console.WriteLine("Updated successfully,test pass");
-            }
-            else
-            {
-                Console.WriteLine("Update Failed,test failed");
-            }
+            //{
+            //    Console.WriteLine("Updated successfully,test pass");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Update Failed,test failed");
+            //}
+            //Example-2
+            Assert.That(updatedCodeBox.Text == "How?", "Actual code and Expected code donot match.");
         }
         public void DeleteTM(IWebDriver driver)
         {
