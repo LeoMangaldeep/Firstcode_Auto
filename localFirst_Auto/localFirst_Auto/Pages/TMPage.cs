@@ -18,8 +18,9 @@ namespace localFirst_Auto.Pages
             
             //Select Create New element in the time&material collumn
             IWebElement createNew = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
+            WaitHelpers.WaitForElementToBeClickable(driver, "XPath", "//*[@id='container']/p/a", 5);
             createNew.Click();
-            WaitHelpers.WaitForElementToBeClickable(driver,"XPath","//*[@id='container']/p/a",5);
+           
 
 
             //Select Typecode dropdown to choose time & click
