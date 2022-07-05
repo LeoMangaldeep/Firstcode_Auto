@@ -54,7 +54,8 @@ namespace localFirst_Auto
         [TearDown]
         public void CloseTestRun()
         {
-            driver.Close();
+            driver.Quit();
+                
         }
             
     }
