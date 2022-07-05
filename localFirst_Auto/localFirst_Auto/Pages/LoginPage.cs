@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
@@ -20,30 +21,24 @@ namespace localFirst_Auto.Pages
             //launch url "horse.turnup"
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2fTimeMaterial");
 
-            // Select username textbox & enter valid username credentials.
-            IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
-            usernameTextbox.SendKeys("hari");
-
-            // Select password textbox and enter valid credentials.
-            IWebElement passwordTextbox = driver.FindElement(By.Id("Password"));
-            passwordTextbox.SendKeys("123123");
-
-            //identify the login textbox and click.
-            IWebElement loginButton = driver.FindElement(By.XPath("//*[@id='loginForm']/form/div[3]/input[1]"));
-            loginButton.Click();
-            Thread.Sleep(1500);
-
-            //Check if it was successfully loggedin.
-            IWebElement helloHari = driver.FindElement(By.XPath("//*[@id='logoutForm']/ul/li/a"));
-
-
-            if (helloHari.Text == "Hello hari!")
+            try
             {
-                Console.WriteLine("Login Successful, Test Passed");
+                // Select username textbox & enter valid username credentials.
+                IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
+                usernameTextbox.SendKeys("hari");
+
+                // Select password textbox and enter valid credentials.
+                IWebElement passwordTextbox = driver.FindElement(By.Id("Password"));
+                passwordTextbox.SendKeys("123123");
+
+                //identify the login textbox and click.
+                IWebElement loginButton = driver.FindElement(By.XPath("//*[@id='loginForm']/form/div[3]/input[1]"));
+                loginButton.Click();
+                Thread.Sleep(1500);
             }
-            else
+            catch(Exception ex)
             {
-                Console.WriteLine("Login Failed, Test Failed");
+                Assert.Fail("Turnup portal page did not launch",ex.Message );
             }
 
         }

@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using localFirst_Auto.Utilities;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
@@ -14,19 +16,12 @@ namespace localFirst_Auto.Pages
     {
         public void CreateTM(IWebDriver driver)
         {
-            //launch web browser "chrome browser"
-            driver = new ChromeDriver();
-
-            //Find Administration element & click the dropdown to select Time&Material & click
-            IWebElement adminDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
-            adminDropdown.Click();
-
-            IWebElement tmOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
-            tmOption.Click();
-
+            
             //Select Create New element in the time&material collumn
             IWebElement createNew = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
+            WaitHelpers.WaitForElementToBeClickable(driver, "XPath", "//*[@id='container']/p/a", 5);
             createNew.Click();
+           
 
 
             //Select Typecode dropdown to choose time & click
@@ -66,15 +61,17 @@ namespace localFirst_Auto.Pages
 
             IWebElement newRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             //Thread.Sleep(3500);                               
-
-            if (newRow.Text == "code123")
-            {
-                Console.WriteLine("Row created Successfully,Test Passed.");
-            }
-            else
-            {
-                Console.WriteLine("Failed to create a New Row, Test Failed.");
-            }
+            Console.WriteLine(" before Assert.pass or fail executed");
+            //Example-1
+            //if (newRow.Text == "code123")
+            //{
+            //    Assert.Pass("Row created Successfully,Test Passed.");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Failed to create a New Row, Test Failed.");
+            //}
+            Console.WriteLine("Assert.pass or fail executed");
 
         }
 
@@ -86,6 +83,8 @@ namespace localFirst_Auto.Pages
             editButton.Click();
             Thread.Sleep(3500);
 
+            Console.WriteLine("editButton clicked");
+
             //Select Time option in typecode dropdown
             IWebElement dropDownOption = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]"));
             dropDownOption.Click();
@@ -93,11 +92,15 @@ namespace localFirst_Auto.Pages
             timeOption.Click();
             Thread.Sleep(2500);
 
+            Console.WriteLine("edit dropdown clicked");
+
             //Select code element and give new input
             IWebElement editCode = driver.FindElement(By.Id("Code"));
             editCode.Clear();
             editCode.SendKeys("How?");
             Thread.Sleep(2500);
+
+            Console.WriteLine("edit editcode clicked");
 
             //Select description element and give new input
             IWebElement editDescriptionTextbox = driver.FindElement(By.Id("Description"));
@@ -105,9 +108,13 @@ namespace localFirst_Auto.Pages
             editDescriptionTextbox.SendKeys("Miracle");
             Thread.Sleep(2500);
 
+            Console.WriteLine("edit descriptiontextbox clicked");
+
             //Select price element and give new input
             IWebElement editPriceTextbox = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
             editPriceTextbox.Click();
+
+            Console.WriteLine("editprice textbox clicked");
             //Thread.Sleep(5000);
 
             //Manually getting inputs
@@ -117,10 +124,14 @@ namespace localFirst_Auto.Pages
             editEditNewPrice.SendKeys("33");
             Thread.Sleep(2500);
 
+            Console.WriteLine("editeditnewprice clicked");
+
             //click save element
             IWebElement editSave = driver.FindElement(By.Id("SaveButton"));
             editSave.Click();
             Thread.Sleep(2000);
+
+            Console.WriteLine("editeditednewprice clicked");
 
 
             //goToLastPage.Click();
@@ -128,6 +139,8 @@ namespace localFirst_Auto.Pages
             Thread.Sleep(2000);
             editGoToLastPage.Click();
             Thread.Sleep(2000);
+
+            Console.WriteLine("editgotolastpage clicked");
 
             //Check if edited row saved
 
@@ -140,15 +153,17 @@ namespace localFirst_Auto.Pages
             IWebElement updatedPriceBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[4]"));
 
 
-            if (updatedCodeBox.Text == "How?" && updatedDescBox.Text == "Miracle" && updatedPriceBox.Text == "$33.00")
+           // if (updatedCodeBox.Text == "How?" && updatedDescBox.Text == "Miracle" && updatedPriceBox.Text == "$33.00")
 
-            {
-                Console.WriteLine("Updated successfully,test pass");
-            }
-            else
-            {
-                Console.WriteLine("Update Failed,test failed");
-            }
+           // {
+           //     Console.WriteLine("Updated successfully,test pass");
+           // }
+           // else
+           // {
+           //     Console.WriteLine("Update Failed,test failed");
+           // }
+           //Example - 2
+            Assert.That(updatedCodeBox.Text == "How?", "Actual code and Expected code donot match.");
         }
         public void DeleteTM(IWebDriver driver)
         {
