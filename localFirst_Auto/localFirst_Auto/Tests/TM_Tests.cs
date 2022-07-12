@@ -9,53 +9,40 @@ using System.Threading;
 namespace localFirst_Auto
 {
     [TestFixture]
+    [Parallelizable]
     public class TM_Tests : CommonDriver
-    { 
-        [SetUp]
-        public void LoginActions()
-        {
-        //Open new chrome browser
-        driver = new ChromeDriver();
+    {
 
-        //Loginpage object initilization & definition
-        LoginPage loginPageobj = new LoginPage();
-        loginPageobj.LoginActions(driver);
-
-        //Homepage object creation & initialization
+        //Page object initialization
+        TMPage tmPageobj = new TMPage();
         HomePage homePageobj = new HomePage();
-        homePageobj.GoToTMPage(driver);
-        }
 
-        [Test]
+
+        [Test, Order(1), Description("Create Time and Material record with valid credentials.")]
         public void CreteTM()
-        {        
+        {
+            //Homepage initialization
+            homePageobj.GoToTMPage(driver);
             //TMPage object creation 
-            TMPage tmPageobj = new TMPage();
             tmPageobj.CreateTM(driver);
         } 
         
-        [Test]
+        [Test,Order(2), Description("Edit Time and Material record with new set of datas in test 1")]
         public void EditTM()
         {
-            
-            TMPage tmPageobj = new TMPage();
+            //Homepage initialization
+            homePageobj.GoToTMPage(driver);
             tmPageobj.CreateTM(driver);
             tmPageobj.EditTM(driver);
         }
 
-        [Test]
+        [Test,Order(3), Description("Delete Time and Material record created in test 2.")]
         public void DeleteTM()
         {
-            TMPage tmPageobj = new TMPage();
+            //Homepage initialization
+            homePageobj.GoToTMPage(driver);
             tmPageobj.CreateTM(driver);
             tmPageobj.DeleteTM(driver);
-        }
-
-        [TearDown]
-        public void CloseTestRun()
-        {
-            driver.Quit();
-                
         }
             
     }

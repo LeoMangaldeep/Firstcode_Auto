@@ -1,0 +1,26 @@
+﻿using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace localFirst_Auto.Pages
+{
+    public class EmployeePage
+    {
+        public void CreateEmployee(IWebDriver driver)
+        {
+            IWebElement 
+        }
+        public void EditEmployee(IWebDriver driver)
+        {
+
+        }
+        public void DeleteEmployee(IWebDriver driver)
+        {
+
+        }
+    }
+}
+

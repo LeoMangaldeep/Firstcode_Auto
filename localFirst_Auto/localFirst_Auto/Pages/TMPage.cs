@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace localFirst_Auto.Pages
 {
-    public class TMPage
+    public class TMPage : CommonDriver
 
     {
         public void CreateTM(IWebDriver driver)
         {
-            
+
             //Select Create New element in the time&material collumn
             IWebElement createNew = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
             WaitHelpers.WaitForElementToBeClickable(driver, "XPath", "//*[@id='container']/p/a", 5);
             createNew.Click();
-           
+
 
 
             //Select Typecode dropdown to choose time & click
@@ -52,18 +52,13 @@ namespace localFirst_Auto.Pages
             Thread.Sleep(1000);
 
             //Select gotolastpage(>|) icon
-
             IWebElement goToLastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             goToLastPage.Click();
             Thread.Sleep(2500);
 
-            //Confirm the creation of new row
-
-            IWebElement newRow = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            //Thread.Sleep(3500);                               
-            Console.WriteLine(" before Assert.pass or fail executed");
-            //Example-1
-            //if (newRow.Text == "code123")
+                
+            //// Example - 1
+            //if (newCode.Text == "code123" && newTypeCode.Text == "M" && newDescription.Text == "descrip123" && newPrice.Text == "$12.00")
             //{
             //    Assert.Pass("Row created Successfully,Test Passed.");
             //}
@@ -71,8 +66,28 @@ namespace localFirst_Auto.Pages
             //{
             //    Assert.Fail("Failed to create a New Row, Test Failed.");
             //}
-            Console.WriteLine("Assert.pass or fail executed");
+            //Console.WriteLine("Assert.pass or fail executed");
 
+        }
+        public string GetNewCode(IWebDriver driver)
+        {
+            IWebElement newCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return newCode.Text;
+        }
+        public string GetNewTypeCode(IWebDriver driver)
+        {
+            IWebElement newTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
+            return newTypeCode.Text;
+        }
+        public string GetNewDescriptipn(IWebDriver driver)
+        {
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
+        }
+        public string GetNewPrice(IWebDriver driver)
+        {
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
         }
 
         public void EditTM(IWebDriver driver)
@@ -151,20 +166,16 @@ namespace localFirst_Auto.Pages
             IWebElement updatedDescBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[3]"));
 
             IWebElement updatedPriceBox = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[4]"));
+                                                                                                       
 
-
-           // if (updatedCodeBox.Text == "How?" && updatedDescBox.Text == "Miracle" && updatedPriceBox.Text == "$33.00")
-
-           // {
-           //     Console.WriteLine("Updated successfully,test pass");
-           // }
-           // else
-           // {
-           //     Console.WriteLine("Update Failed,test failed");
-           // }
-           //Example - 2
             Assert.That(updatedCodeBox.Text == "How?", "Actual code and Expected code donot match.");
+            Assert.That(updatedTypeShowBox.Text == "T", "Actual Type and Expected Type donot match.");
+            Assert.That(updatedDescBox.Text == "Miracle", "Actual description and Expected description donot match.");
+            Assert.That(updatedPriceBox.Text == "$33.00", "Actual price and Expected price donot match.");
+
         }
+
+       
         public void DeleteTM(IWebDriver driver)
         {
             //Delete Last Row
@@ -172,6 +183,11 @@ namespace localFirst_Auto.Pages
             deleteLastRow.Click();
             IAlert oKMessage = driver.SwitchTo().Alert();
             oKMessage.Accept();
+        }
+
+        public static implicit operator string(TMPage v)
+        {
+            throw new NotImplementedException();
         }
     }
 
