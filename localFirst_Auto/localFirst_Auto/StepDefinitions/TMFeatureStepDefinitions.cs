@@ -52,5 +52,29 @@ namespace localFirst_Auto.StepDefinitions
             Assert.That(newDescription == "descrip123", "Actual Description and Expected Description do Not match.");
             Assert.That(newPrice == "$12.00", "Actual Price and Expected Price do Not match.");
         }
+
+        [When(@"I updated '([^']*)', '([^']*)','([^']*)' on existing Time and material record\.")]
+        public void WhenIUpdatedOnExistingTimeAndMaterialRecord_(string descriptionp0, string codep1, string pricep2)
+        {
+            TMPage tmPageObj = new TMPage();
+            tmPageObj.EditTM(driver, descriptionp0, codep1, pricep2);
+            
+        }
+
+        [Then(@"The record should have the updated '([^']*)','([^']*)','([^']*)'")]
+        public void ThenTheRecordShouldHaveTheUpdated(string descriptionp0, string codep1, string pricep2)
+        {
+            TMPage tmPageObj = new TMPage();
+            string editedDiscription = tmPageObj.GetEditedDescription(driver);
+            Assert.That(editedDiscription == descriptionp0, "Actual description and edited description did not match");
+            string editedCode = tmPageObj.GetEditedCode(driver);
+            Assert.That(editedCode == codep1, "Actual code and edited code did not match");
+            string editedPrice = tmPageObj.GetEditedPrice(driver);
+            Assert.That(editedPrice == pricep2, "Actual price and edited price did not match");
+        }
+
+        
+
+
     }
 }

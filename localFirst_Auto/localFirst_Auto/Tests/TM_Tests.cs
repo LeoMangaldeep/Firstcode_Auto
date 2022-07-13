@@ -14,35 +14,35 @@ namespace localFirst_Auto
     {
 
         //Page object initialization
-        TMPage tmPageobj = new TMPage();
-        HomePage homePageobj = new HomePage();
+        TMPage tmPageObj = new TMPage();
+        HomePage homePageObj = new HomePage();
 
 
         [Test, Order(1), Description("Create Time and Material record with valid credentials.")]
         public void CreteTM()
         {
             //Homepage initialization
-            homePageobj.GoToTMPage(driver);
+            homePageObj.GoToTMPage(driver);
             //TMPage object creation 
-            tmPageobj.CreateTM(driver);
+            tmPageObj.CreateTM(driver);
         } 
         
         [Test,Order(2), Description("Edit Time and Material record with new set of datas in test 1")]
         public void EditTM()
         {
             //Homepage initialization
-            homePageobj.GoToTMPage(driver);
-            tmPageobj.CreateTM(driver);
-            tmPageobj.EditTM(driver);
+            homePageObj.GoToTMPage(driver);
+            tmPageObj.CreateTM(driver);
+            tmPageObj.EditTM(driver, "dummy","dummy","dummy");
         }
 
         [Test,Order(3), Description("Delete Time and Material record created in test 2.")]
         public void DeleteTM()
         {
             //Homepage initialization
-            homePageobj.GoToTMPage(driver);
-            tmPageobj.CreateTM(driver);
-            tmPageobj.DeleteTM(driver);
+            homePageObj.GoToTMPage(driver);
+            tmPageObj.CreateTM(driver);
+            tmPageObj.DeleteTM(driver);
         }
             
     }

@@ -31,7 +31,7 @@ namespace localFirst_Auto.Utilities
         [OneTimeTearDown]
         public void CloseTestRun()
         {
-           //driver.Quit();
+           driver.Close();
         }
     }
 }
