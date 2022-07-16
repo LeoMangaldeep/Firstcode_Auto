@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "fbc6d14a-8c31-4811-b8e8-a106f1fe3648",
+		"name": "Dummy APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21983521"
+	},
+	"item": [
+		{
+			"name": "Get all employee data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a single employee data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/10",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new record in database",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"testLeo\",\r\n    \"salary\": \"1239000\",\r\n    \"age\": \"23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an employee record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"testRocky\",\r\n    \"salary\": \"900000\",\r\n    \"age\": \"300\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/update/21",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an employee record",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

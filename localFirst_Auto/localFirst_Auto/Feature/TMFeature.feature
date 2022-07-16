@@ -23,3 +23,9 @@ Examples:
 | Keyboard    | How  | $54.00  |
 | Pen         | When | $1.00    |
 | EditedRow   | Why  | $900,000.00 |
+
+Scenario: 3  Delete time and material record with valid credentials
+Given I Logged into turnup portal sucessfully.
+When I navigate in to time and material page into .
+#When I updated '<Description>', '<Code>','<Price>' on existing Time and material record.
+#Then The record should have the updated '<Description>','<Code>','<Price>'
